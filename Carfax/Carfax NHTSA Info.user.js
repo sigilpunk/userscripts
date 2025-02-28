@@ -188,6 +188,7 @@
         let infoLink = document.createElement("a")
         infoLink.href = sessionStorage.getItem(`${vin}_NHSTA_url.txt`)
         infoLink.textContent = sessionStorage.getItem(`${vin}_NHSTA_url.txt`)
+        infoLink.setAttribute("target", "_blank")
         recallsDiv.parentNode.appendChild(infoLink)
         recallsDiv.firstChild.textContent = `Recalls (${vehicleRecalls.Count})`;
 
@@ -200,7 +201,7 @@
 
         for(let i in recallComponents){
           let li = document.createElement("li");
-          li.innerHTML = `<a href="https://www.nhtsa.gov/?nhtsaId=${recallIds[i]}">${recallComponents[i]}</a>`;
+          li.innerHTML = `<a href="https://www.nhtsa.gov/?nhtsaId=${recallIds[i]}" target="_blank">${recallComponents[i]}</a>`;
           recallsList.appendChild(li);
         }
         node.after(panelClone);
