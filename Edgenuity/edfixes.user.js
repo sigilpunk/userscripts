@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        edgenuity fixes
+// @name        Edfixes
 // @namespace   Violentmonkey Scripts
 // @match       https://r04.core.learn.edgenuity.com/player/*
 // @grant       none
