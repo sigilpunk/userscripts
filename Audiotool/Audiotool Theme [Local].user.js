@@ -94,6 +94,43 @@ styleSheet.textContent  = `
 `;
 document.head.appendChild(styleSheet);
 
+async function addSampleDownloadButton(){
+  if(document.querySelector("#downloadButton")){document.querySelector("#downloadButton").remove()}
+  var title = null;
+  // await new Promise(r => setTimeout(r, 1000));
+  var title = document.querySelector("div.sample.selected span.name");
+  // var name = encodeURIComponent(title.innerText.replaceAll(" ", "_").toLowerCase()).replaceAll(/%[A-F0-9]{2}/gm, "");
+  var name = title.innerText.replaceAll(" ", "_").replaceAll("/", "").toLowerCase()
+  var url = `https://api.audiotool.com/sample/${name}/0/origin.wav`;
+  var header = document.querySelector("div.sample-details header");
+  const dlAnchor = document.createElement("a")
+  dlAnchor.href = url
+  dlAnchor.setAttribute("target","_blank")
+  const dlButton = header.querySelector("button.tiny").cloneNode();
+  dlButton.setAttribute("id", "downloadButton")
+  const dlSvg = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_0_3)">
+      <mask id="mask0_0_3" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+        <path d="M16 0H0V16H16V0Z" fill="#808080"/>
+      </mask>
+      <g mask="url(#mask0_0_3)">
+        <path d="M13.5897 10.1968V13.8517H2.40975V10.1968H0.260986V14.9261C0.260986 15.5191 0.741338 16 1.33697 16H14.6625C15.2576 16 15.7385 15.5196 15.7385 14.9261V10.1968H13.5897Z" fill="white"/>
+        <path d="M7.80305 9.83442L4.72665 6.11702C4.72665 6.11702 4.25857 5.6751 4.76615 5.6751C5.27373 5.6751 6.49969 5.6751 6.49969 5.6751C6.49969 5.6751 6.49969 5.37782 6.49969 4.91934C6.49969 3.61224 6.49969 1.23344 6.49969 0.26366C6.49969 0.26366 6.43083 0 6.82793 0C7.22823 0 8.98151 0 9.26813 0C9.55419 0 9.54779 0.22203 9.54779 0.22203C9.54779 1.16245 9.54779 3.62346 9.54779 4.88786C9.54779 5.29776 9.54779 5.56354 9.54779 5.56354C9.54779 5.56354 10.5309 5.56354 11.1479 5.56354C11.7638 5.56354 11.3 6.02628 11.3 6.02628C11.3 6.02628 8.68263 9.50084 8.31755 9.86536C8.05497 10.1296 7.80305 9.83442 7.80305 9.83442Z" fill="white"/>
+      </g>
+    </g>
+    <defs>
+      <clipPath id="clip0_0_3">
+        <rect width="16" height="16" fill="#808080"/>
+      </clipPath>
+    </defs>
+  </svg>`
+  dlButton.insertAdjacentHTML("beforeend", dlSvg);
+  dlAnchor.appendChild(dlButton)
+  header.appendChild(dlAnchor)
+}
+
+$(document).livequery("div.sample.selected", addSampleDownloadButton);
+
 $(document).livequery("div.meta", (meta) => {
   meta.style.backgroundColor = contextMenuColor;
   meta.style.backdropFilter = contextMenuBackdropFilter;
